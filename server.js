@@ -1,19 +1,17 @@
 const express = require('express');
 const path = require('path');
-
 const app = express();
-const PORT = 3000;
+const port = process.env.PORT || 3000;
 
-app.use(express.static('public'));
+// Static dosyalar için ana dizini kullan
+app.use(express.static(path.join(__dirname)));
 
+// Ana sayfa route'u
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-app.get('/login', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'login.html'));
-});
-
-app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+// Sunucuyu başlat
+app.listen(port, () => {
+    console.log(`Server running at http://localhost:${port}`);
 });
